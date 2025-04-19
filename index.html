@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dream Cloud</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.1.1/wordcloud2.min.js"></script>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: #f6f5f3;
+      color: #333;
+      text-align: center;
+      padding: 2em;
+    }
+    h1 {
+      font-style: italic;
+      margin-bottom: 0.5em;
+    }
+    p {
+      margin-bottom: 1.5em;
+    }
+    input[type="text"] {
+      width: 60%;
+      padding: 0.8em;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      padding: 0.8em 1.5em;
+      margin-left: 1em;
+      font-size: 1em;
+      background: #d6d3f0;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #wordCloud {
+      width: 100%;
+      height: 500px;
+      margin-top: 2em;
+      border: 1px solid #ddd;
+      background: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌀 Dream Word Cloud</h1>
+  <p>Describe a key word, image, or feeling from your dream. Contribute to the collective dreamscape.</p>
+  <input type="text" id="dreamWord" placeholder="e.g., A floating house, endless stairs, blue light" />
+  <button onclick="addDreamWord()">Add to Dream Cloud</button>
+
+  <div id="wordCloud"></div>
+
+  <script>
+    let words = [];
+
+    function addDreamWord() {
+      const input = document.getElementById("dreamWord");
+      const word = input.value.trim();
+      if (word.length > 0) {
+        words.push([word, Math.floor(Math.random() * 50) + 10]);
+        renderCloud();
+        input.value = "";
+      }
+    }
+
+    function renderCloud() {
+      WordCloud(document.getElementById('wordCloud'), {
+        list: words,
+        gridSize: 10,
+        weightFactor: 2,
+        fontFamily: 'Times, serif',
+        color: 'random-dark',
+        backgroundColor: '#ffffff'
+      });
+    }
+  </script>
+</body>
+</html>
